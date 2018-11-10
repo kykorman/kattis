@@ -3,27 +3,22 @@
 using namespace std;
 
 int main(){
-	char message[500],key[500],res[500];
 
-	cin>>message>>key;
+    string key;
+    string enc;
 
-	int mesLen=strlen(message),keyLen=strlen(key);
+    cin>>enc>>key;
 
-	for(int i=0;i<keyLen;i++){
-		int tmp=(message[i]-key[i])%26;
-		while(tmp<0)
-			tmp+=26;
-		res[i]=tmp+'A';
-		cout<<(char)res[i];
+    for(int i=0;i<enc.length();i++){
+        enc[i]-=(key[i]-'A');
 
-	}
+        if(enc[i]<'A')
+            enc[i]+=26;
 
-	for(int i=keyLen;i<mesLen;i++){
-		int tmp=(message[i]-res[i-keyLen])%26;
-		while(tmp<0)
-			tmp+=26;
-		res[i]=tmp+'A';
-		cout<<(char)res[i];
-	}
-	cout<<endl;
-return 0;}
+        key+=enc[i];
+    }
+
+    cout<<enc<<endl;
+
+    return 0;
+}
